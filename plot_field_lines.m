@@ -20,7 +20,7 @@ function plot_field_lines(u,v,x0,y0,xmin,xmax,ymin,ymax,N,tsim,dt)
 %   1. Green solid line : Streakline
 %   2. Red dotted line  : Pathline
 %   3. Blue solid lines : Streamlines
-%   4. Yellow vectors   : Velocity vector field
+%   4. Magenta vectors  : Velocity vector field
 %
 % Author: Divyaprakash
 %         Mechanical Engineer
@@ -43,9 +43,9 @@ function plot_field_lines(u,v,x0,y0,xmin,xmax,ymin,ymax,N,tsim,dt)
         V = v(X,Y,t);
 
         % Contour plot
-        Umag = sqrt(U.^2+V.^2);
-        colormap(gray)
-        contourf(X,Y,Umag,N*5,'edgecolor','none')
+        %Umag = sqrt(U.^2+V.^2);
+        %colormap(gray)
+        %contourf(X,Y,Umag,N*5,'edgecolor','none')
         
         % Streamlines
         hold on
@@ -58,7 +58,7 @@ function plot_field_lines(u,v,x0,y0,xmin,xmax,ymin,ymax,N,tsim,dt)
         startx = x;
         starty = ymax*ones(size(startx));
         streamline(X,Y,U,V,startx,starty)
-        quiver(X,Y,U,V,'y')
+        quiver(X,Y,U,V,'m')
 
         % Pathline
         xTemp = x0 + interp2(X,Y,U,x0,y0)*dt;
@@ -68,8 +68,8 @@ function plot_field_lines(u,v,x0,y0,xmin,xmax,ymin,ymax,N,tsim,dt)
         xp = [xp x0];
         yp = [yp y0];
 
-        plot(x0,y0,'ro','MarkerSize',10,'MarkerFaceColor','r')
-        plot(xp,yp,'r--')
+        plot(x0,y0,'ro','MarkerSize',10,'MarkerFaceColor','r','linewidth',4)
+        plot(xp,yp,'r--','linewidth',4)
 
         % Streakline
         xs = size(xp); ys = size(yp);
@@ -77,7 +77,7 @@ function plot_field_lines(u,v,x0,y0,xmin,xmax,ymin,ymax,N,tsim,dt)
             xs(i) = xp(i) + interp2(X,Y,U,xp(i),yp(i))*dt;
             ys(i) = yp(i) + interp2(X,Y,V,xp(i),yp(i))*dt;
         end
-        plot(xs,ys,'g-')
+        plot(xs,ys,'g-','linewidth',4)
         
         hold off
         set(gca,'xlim',[xmin, xmax])

@@ -1,4 +1,32 @@
 function plot_field_lines(u,v,x0,y0,xmin,xmax,ymin,ymax,N,tsim,dt)
+%plot_field_lines: Plots field lines of fluid flow
+% plot_field_lines(u,v,x0,y0,xmin,xmax,ymin,ymax,N,tsim,dt):
+%   Plots field lines of fluid flow, Streamlines, Streaklines and Pathlines
+%
+% input: 
+%   u       = A function handle for the x component of the velocity vector
+%   v       = A function handle for the y component of the velocity vector
+%   x0      = x-coordinate of the starting position of a particle
+%   y0      = y-coordinate of the starting position of a particle
+%   xmin    = Minimum value of x in the spatial domain to be plotted
+%   xmax    = Maximum value of x in the spatial domain to be plotted
+%   ymin    = Minimum value of y in the spatial domain to be plotted
+%   ymax    = Maximum value of y in the spatial domain to be plotted
+%   N       = No. of divisions along each of the 2 dimensions (x and y)
+%   tsim    = Time upto which the lines are to be plotted
+%   dt      = Time interval
+% output:
+%   A video file in which the lines represent the following.
+%   1. Green solid line : Streakline
+%   2. Red dotted line  : Pathline
+%   3. Blue solid lines : Streamlines
+%   4. Yellow vectors   : Velocity vector field
+%
+% Author: Divyaprakash
+%         Mechanical Engineer
+% e-mail: divyaprakash.poddar@gmail.com
+% Date  : 06 January 2022
+
     x       = linspace(xmin,xmax,N);
     y       = linspace(ymin,ymax,N);
     [X,Y]   = meshgrid(x,y);
@@ -30,7 +58,7 @@ function plot_field_lines(u,v,x0,y0,xmin,xmax,ymin,ymax,N,tsim,dt)
         startx = x;
         starty = ymax*ones(size(startx));
         streamline(X,Y,U,V,startx,starty)
-        quiver(X,Y,U,V,'m')
+        quiver(X,Y,U,V,'y')
 
         % Pathline
         xTemp = x0 + interp2(X,Y,U,x0,y0)*dt;
